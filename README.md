@@ -425,7 +425,7 @@ Configuración de conexión para migraciones.
 ## Clonar repositorio
 
 ```bash
-git clone https://github.com/usuario/file-explorer.git
+git clone [https://github.com/usuario/file-explorer.git](https://github.com/Lorena-03/FileExplorer/tree/master)
 ```
 
 ## Abrir solución
