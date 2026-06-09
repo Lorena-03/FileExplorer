@@ -17,16 +17,6 @@ File Explorer es una aplicación creada en C# Windows Forms que integra diferent
 
 #  Capturas del sistema
 
-##  Ventana principal
-
-
-
----
-
-##  Explorador de archivos
-
-
-
 ---
 
 ##  Reproductor de música
@@ -42,7 +32,7 @@ File Explorer es una aplicación creada en C# Windows Forms que integra diferent
 ---
 
 ## Editor de documentos
-
+![image alt](https://github.com/Lorena-03/FileExplorer/blob/58cfe438ea6f4a5dd03a91f1b1c984fae087e21a/Captura%20de%20pantalla%202026-06-09%20085007.png)
 
 
 ---
