@@ -20,7 +20,7 @@ File Explorer es una aplicación creada en C# Windows Forms que integra diferent
 ---
 
 ##  Reproductor de música
-
+![image alt](https://github.com/Lorena-03/FileExplorer/blob/70750ffc62368c63ded9b5d6878043a8c38ff680/Captura%20de%20pantalla%202026-06-08%20210044.png)
 
 
 ---
