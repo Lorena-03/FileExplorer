@@ -43,7 +43,7 @@ File Explorer es una aplicación creada en C# Windows Forms que integra diferent
 ---
 
 ##  Migración de bases de datos
-
+![image alt](https://github.com/Lorena-03/FileExplorer/blob/80b58bd6b26bada2cb056212fb791e99b9384a6a/Captura%20de%20pantalla%202026-06-09%20071509.png)
 
 
 ---
