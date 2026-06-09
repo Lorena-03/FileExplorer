@@ -353,7 +353,7 @@ Barra lateral de navegación rápida.
 
 ---
 
-# 🧠 Modelos del sistema
+#  Modelos del sistema
 
 ##  PlaylistItem
 
