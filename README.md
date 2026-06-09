@@ -448,7 +448,7 @@ La documentación completa del sistema se encuentra incluida en el proyecto acad
 ---
 
 #  Autores
-Lorena Cervantes
+Lorena Cervantes, 
 Sergio Flores
 
 ---
