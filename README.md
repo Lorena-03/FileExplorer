@@ -38,7 +38,7 @@ File Explorer es una aplicación creada en C# Windows Forms que integra diferent
 ---
 
 ## Editor de imágenes
-
+![image alt](https://github.com/Lorena-03/FileExplorer/blob/d4980c97fe635a20571fdef090458dd1ff69d3cd/Captura%20de%20pantalla%202026-06-08%20205207.png)
 
 ---
 
