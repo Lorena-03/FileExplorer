@@ -1,0 +1,1445 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FileExplorer</name>
+    </assembly>
+    <members>
+        <member name="E:FileExplorer.Controls.SidebarControl.NewFileRequested">
+            <summary>
+            Se dispara cuando el usuario hace clic en uno de los botones de nuevo archivo.
+            El parámetro es la extensión: ".pdf", ".docx" o ".xlsx".
+            </summary>
+        </member>
+        <member name="T:FileExplorer.Forms.AudioRecorderForm">
+            <summary>
+            Grabador de audio con soporte WAV y MP3, visualizador de forma de onda,
+            medidor de nivel, pausa/reanudacion y guardado con dialogo STA.
+            </summary>
+        </member>
+        <member name="E:FileExplorer.Forms.AudioRecorderForm.FileSaved">
+            <summary>Se dispara cuando la grabacion se guarda con la ruta del archivo resultante.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.#ctor">
+            <summary>
+            Inicializa el grabador, enumera microfonos disponibles en background
+            y configura el timer de actualizacion de UI.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.BtnRecord_Click(System.Object,System.EventArgs)">
+            <summary>Inicia o reanuda la grabacion.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.BtnPause_Click(System.Object,System.EventArgs)">
+            <summary>Pausa la grabacion.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.BtnStop_Click(System.Object,System.EventArgs)">
+            <summary>Detiene la grabacion y habilita el guardado.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.WaveIn_DataAvailable(System.Object,NAudio.Wave.WaveInEventArgs)">
+            <summary>Acumula samples, escribe al WAV temporal y actualiza el nivel de pico.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.WaveIn_RecordingStopped(System.Object,NAudio.Wave.StoppedEventArgs)">
+            <summary>Libera WaveIn y WaveFileWriter al detener.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.BtnSave_Click(System.Object,System.EventArgs)">
+            <summary>Guarda la grabacion como WAV o MP3 con dialogo STA.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.ConvertToMp3(System.String,System.String)">
+            <summary>Convierte el WAV temporal a MP3 usando LameMP3FileWriter.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.UiTimer_Tick(System.Object,System.EventArgs)">
+            <summary>Actualiza cronometro, nivel y forma de onda cada 50ms.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.GetWaveFormat">
+            <summary>Devuelve el WaveFormat segun el indice del ComboBox.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.SetStatus(System.String,System.Drawing.Color)">
+            <summary>Actualiza el label de estado.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.StopAndCleanup">
+            <summary>Detiene y libera todos los recursos al cerrar.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.SafeInvoke(System.Action)">
+            <summary>Invoca una accion en el hilo UI de forma segura.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.InitializeComponent">
+            <summary>
+            Construye toda la interfaz: titulo, cronometro, visualizador de forma de onda,
+            medidor de nivel, selector de microfono y formato, nombre de archivo y botones.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.Sep(System.Int32,System.Int32)">
+            <summary>Crea una linea separadora horizontal.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.RowLabel(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>Crea un label de campo con estilo del tema.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.MkBtn(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Drawing.Color,System.Drawing.Color)">
+            <summary>Crea un boton con esquinas redondeadas y color hover.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.AudioRecorderForm.PnlWave_Paint(System.Object,System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Dibuja la forma de onda acumulada en el panel, usando rojo si esta grabando
+            o gris si esta pausado/detenido.
+            </summary>
+        </member>
+        <member name="T:FileExplorer.Forms.CameraForm">
+            <summary>
+            Formulario de cámara con preview en tiempo real via AForge,
+            captura de fotos y grabación de video AVI.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.CameraForm.OnShown(System.Object,System.EventArgs)">
+            <summary>Enumera los dispositivos de video y los carga en el ComboBox.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.CameraForm.CambiarCamara">
+            <summary>Cambia a la cámara seleccionada en el ComboBox.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.CameraForm.Camera_NewFrame(System.Object,AForge.Video.NewFrameEventArgs)">
+            <summary>Callback de AForge — se llama por cada frame de la cámara.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.CameraForm.DetenerCamara">
+            <summary>Detiene y libera la cámara actual.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.CameraForm.BtnCapturar_Click(System.Object,System.EventArgs)">
+            <summary>Captura el frame actual y lo muestra como miniatura.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.CameraForm.FlashEffect">
+            <summary>Muestra un flash blanco breve para simular el disparo.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.CameraForm.BtnGuardar_Click(System.Object,System.EventArgs)">
+            <summary>Guarda la foto capturada con diálogo STA.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.CameraForm.IniciarGrabacionVideo">
+            <summary>Inicia la grabación de video AVI con los frames del preview.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.CameraForm.BtnGuardarVideo_Click(System.Object,System.EventArgs)">
+            <summary>Guarda el video temporal con diálogo STA.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.CameraForm.InitializeComponent">
+            <summary>
+            Construye toda la interfaz: título, selector de cámara, preview,
+            flash, punto REC, miniatura, estado y botones de acción.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.CameraForm.PnlPreview_Paint(System.Object,System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Dibuja el mensaje de estado en el preview cuando no hay imagen.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.CameraForm.MkBtn(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Drawing.Color,System.Drawing.Color)">
+            <summary>Crea un botón plano con color hover.</summary>
+        </member>
+        <member name="T:FileExplorer.Forms.DbDataViewerForm">
+            <summary>
+            Formulario editable para visualizar y corregir datos leidos de la base de datos.
+            Los cambios se pueden aplicar al archivo original mediante el evento ChangesSaved.
+            </summary>
+        </member>
+        <member name="E:FileExplorer.Forms.DbDataViewerForm.ChangesSaved">
+            <summary>Se dispara cuando el usuario confirma aplicar los cambios al archivo original.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.DbDataViewerForm.#ctor(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.Collections.Generic.List{System.String}},System.Collections.Generic.List{FileExplorer.Models.ValidationError})">
+            <summary>Inicializa el visor con los datos de la BD y la lista de errores detectados.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.DbDataViewerForm.BtnApply_Click(System.Object,System.EventArgs)">
+            <summary>
+            Confirma y dispara ChangesSaved con los datos editados
+            para que FileEditorForm los aplique al archivo original.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.DbDataViewerForm.ShowRowErrors(System.Int32)">
+            <summary>Muestra un dialogo con los errores detectados en la fila seleccionada.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.DbDataViewerForm.InitializeComponent">
+            <summary>
+            Construye la grilla editable con banner de errores, toolbar de aplicar cambios
+            y leyenda de colores en la parte inferior.
+            </summary>
+        </member>
+        <member name="T:FileExplorer.Forms.EmailForm">
+            <summary>
+            Formulario para enviar archivos por correo via SMTP directo,
+            Gmail o Outlook Web. Guarda credenciales cifradas con DPAPI.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.#ctor(System.String)">
+            <summary>Inicializa el formulario con un único archivo adjunto.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.#ctor(System.Collections.Generic.List{System.String})">
+            <summary>Inicializa el formulario con una lista de archivos adjuntos.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.BtnSend_Click(System.Object,System.EventArgs)">
+            <summary>
+            Valida los campos, guarda credenciales y envía el correo
+            de forma asíncrona via SmtpClient con SSL.
+            Detecta automáticamente la configuración correcta para Gmail y Outlook.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.BtnGmail_Click(System.Object,System.EventArgs)">
+            <summary>Construye la URL de Gmail con los campos pre-rellenos y la abre en el navegador.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.BtnOutlook_Click(System.Object,System.EventArgs)">
+            <summary>Construye la URL de Outlook Web con los campos pre-rellenos y la abre en el navegador.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.Open(System.String)">
+            <summary>Abre una URL en el navegador predeterminado del sistema.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.ShowStatus(System.String,System.Drawing.Color)">
+            <summary>Actualiza el texto y color de la barra de estado desde cualquier hilo.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.ParseAddr(System.String)">
+            <summary>Divide una cadena de direcciones separadas por coma o punto y coma.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.SuggestSubject">
+            <summary>Pre-rellena el asunto según la cantidad de archivos adjuntos.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.DefaultBody">
+            <summary>Devuelve el cuerpo de correo predeterminado listando los archivos adjuntos.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.SaveCredentials">
+            <summary>
+            Guarda remitente, servidor SMTP y contrasena cifrada con DPAPI
+            en un archivo JSON en AppData.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.LoadCredentials">
+            <summary>
+            Lee el archivo de credenciales, descifra la contrasena con DPAPI
+            y pre-rellena los campos del formulario.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.CreateRoundRectRgn(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>Importacion nativa de GDI32 para botones con esquinas redondeadas.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.InitializeComponent">
+            <summary>
+            Construye toda la interfaz: toolbar con botones de envio,
+            campos de remitente/destinatario, panel SMTP colapsable,
+            adjuntos, cuerpo del mensaje y barra de estado.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.AddSection(System.Windows.Forms.Panel,System.String,System.Int32)">
+            <summary>Agrega un encabezado de sección al panel y devuelve la altura consumida.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.AddRow(System.Windows.Forms.Panel,System.Int32@,System.String,System.Windows.Forms.TextBox@,System.String)">
+            <summary>Agrega una fila con label y TextBox al panel.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.AddLbl(System.Windows.Forms.Panel,System.String,System.Int32)">
+            <summary>Agrega solo una etiqueta de campo al panel.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.ToolBtn(System.String,System.Drawing.Color,System.Drawing.Color)">
+            <summary>Crea un botón de toolbar con esquinas redondeadas.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.AutoDetectSmtp">
+            <summary>
+            Infiere el servidor SMTP y puerto a partir del dominio del remitente.
+            Soporta Gmail, Outlook/Hotmail/Live y Yahoo.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.EmailForm.MkTag(System.String)">
+            <summary>
+            Crea un chip visual para un archivo adjunto con nombre, tamaño y botón de eliminar.
+            </summary>
+        </member>
+        <member name="T:FileExplorer.Forms.ExcelEditorForm">
+            <summary>
+            Editor de hojas de cálculo Excel con grilla editable, barra de fórmulas
+            y soporte para SUM, AVG, MIN, MAX, COUNT, IF y referencias de celda.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ExcelEditorForm.SaveFile">
+            <summary>
+            Abre un SaveFileDialog para que el usuario elija dónde guardar el XLSX,
+            luego escribe el archivo y muestra confirmación.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ExcelEditorForm.EvalFormula(System.String,System.Int32,System.Int32)">
+            <summary>
+            Evalúa una fórmula simple del tipo =FUNC(A1:B3) o =A1+B2.
+            Soporta SUM, AVG, MIN, MAX, COUNT, IF y referencias directas.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ExcelEditorForm.GetRange(System.String,System.Int32,System.Int32)">
+            <summary>Obtiene los valores numéricos de un rango como A1:C3 o lista A1,B2.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ExcelEditorForm.ColIndex(System.String)">
+            <summary>Convierte nombre de columna (A, B, AA) a índice 0-based.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ExcelEditorForm.ColName(System.Int32)">
+            <summary>Convierte índice 0-based a nombre de columna (0→A, 25→Z, 26→AA).</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ExcelEditorForm.InsertFunc(System.String)">
+            <summary>Inserta una fórmula de ejemplo en la barra de fórmulas.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ExcelEditorForm.InitUI">
+            <summary>
+            Construye toda la interfaz: toolbar de operaciones, barra de fórmulas,
+            grilla virtual con encabezados de columna (A–T) y filas numeradas,
+            y barra de estado con conteo de celdas.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ExcelEditorForm.BuildToolbar">
+            <summary>
+            Construye la toolbar con botones para agregar/eliminar filas y columnas,
+            insertar funciones (SUM, AVG, MIN, MAX, COUNT, IF) y guardar.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ExcelEditorForm.BuildFormulaBar">
+            <summary>
+            Construye la barra de fórmulas: label con nombre de celda (A1, B3…)
+            y TextBox donde se edita/muestra el valor o fórmula de la celda activa.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ExcelEditorForm.BuildGrid">
+            <summary>
+            Construye la grilla virtual: columnas A–T (índice 0–19), 50 filas numeradas,
+            doble buffer activado via reflexión, y eventos de edición y selección.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ExcelEditorForm.BuildStatusBar">
+            <summary>Construye la barra de estado con conteo de filas, columnas y celdas con datos.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ExcelEditorForm.TBtn(System.Windows.Forms.Panel,System.Int32@,System.String,System.String,System.Action)">
+            <summary>Crea un botón de toolbar con tooltip y acción.</summary>
+        </member>
+        <member name="E:FileExplorer.Forms.FileEditorForm.FileSaved">
+            <summary>Se dispara cuando el archivo se guarda con la ruta resultante.</summary>
+        </member>
+        <member name="P:FileExplorer.Forms.FileEditorForm.IsDocFile">
+            <summary>Verdadero si el archivo es un documento Office o PDF.</summary>
+        </member>
+        <member name="P:FileExplorer.Forms.FileEditorForm.IsExcel">
+            <summary>Verdadero si el archivo es una hoja de cálculo Excel.</summary>
+        </member>
+        <member name="P:FileExplorer.Forms.FileEditorForm.IsDataFile">
+            <summary>Verdadero si el archivo contiene datos estructurados (CSV, JSON, XML, etc.).</summary>
+        </member>
+        <member name="P:FileExplorer.Forms.FileEditorForm.IsImage">
+            <summary>Verdadero si el archivo es una imagen.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.#ctor(System.String)">
+            <summary>
+            Inicializa el editor con la ruta del archivo, infiere la extensión
+            y dispara la carga del contenido.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.AddRichEditorTab">
+            <summary>
+            Agrega una pestaña "Editor" con el editor enriquecido (WordPdfEditorForm o ExcelEditorForm)
+            embebido como panel dentro del FileEditorForm.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.AddDocText(System.String,System.Single,System.Nullable{System.Drawing.Color},System.Drawing.FontStyle)">
+            <summary>
+            Agrega un bloque de texto enriquecido al panel de vista de documento,
+            con tamaño de fuente, color y estilo configurables.
+            El alto se ajusta automáticamente al contenido.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.AddDocSpacer(System.Int32)">
+            <summary>Agrega un espacio vertical al panel de vista de documento.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.AddDocBlock(System.Windows.Forms.Control)">
+            <summary>
+            Agrega cualquier control al FlowLayoutPanel del documento,
+            asignando margen mínimo si no tiene uno definido.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.IsCloudFile(System.String)">
+            <summary>
+            Detecta si un archivo está pendiente de sincronización desde la nube
+            (OneDrive offline o iCloud recall), verificando sus atributos de sistema.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.UpdateInfo">
+            <summary>
+            Actualiza el label de información de la toolbar con el conteo de filas/columnas
+            (modo tabla) o líneas/caracteres (modo editor). Prefija "*" si hay cambios sin guardar.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.Flash(System.String,System.Drawing.Color)">
+            <summary>
+            Muestra un mensaje temporal en el label de información con el color indicado,
+            y lo restaura al estado normal tras 2.5 segundos.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.PickSaveFile(System.String,System.String)">
+            <summary>
+            Abre un SaveFileDialog en hilo STA y devuelve la ruta elegida,
+            o null si el usuario canceló.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.BuildCsv(System.Char)">
+            <summary>
+            Serializa los datos actuales (_headers + _rows) a formato CSV
+            usando el separador indicado. Entrecomilla campos que lo requieran.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.BuildJson">
+            <summary>
+            Serializa los datos actuales a un array JSON con un objeto por fila,
+            usando los headers como claves. Devuelve el JSON indentado.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.BuildXml">
+            <summary>
+            Serializa los datos actuales a XML con estructura &lt;data&gt;&lt;row&gt;...&lt;/row&gt;&lt;/data&gt;.
+            Los nombres de columna se limpian de caracteres no válidos para XML.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.BuildTxt">
+            <summary>
+            Serializa los datos actuales a texto plano con formato de tabla ASCII,
+            con columnas alineadas y separadores de línea.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.Quote(System.String,System.Char)">
+            <summary>
+            Entrecomilla un valor de celda CSV si contiene el separador, comillas dobles o saltos de línea.
+            Las comillas internas se escapan duplicándolas.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.DetectErrors">
+            <summary>
+            Inicia la detección de errores de forma asíncrona y navega a la pestaña Tabla al terminar.
+            Solo actúa si el archivo es de tipo datos y no está cargándose.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.DetectAndHandleErrors">
+            <summary>
+            Ejecuta la detección de errores en background usando DataValidator,
+            actualiza la lista de errores y colorea las celdas afectadas
+            (rojo = manual, amarillo = auto-corregible).
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.FixSelected">
+            <summary>Aplica la corrección automática al error seleccionado en la lista.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.FixAll">
+            <summary>Aplica todas las correcciones automáticas pendientes en la lista de errores.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.ApplyFix(FileExplorer.Models.ValidationError)">
+            <summary>
+            Reemplaza el valor de la celda con la corrección sugerida y marca el error como corregido.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.NavigateToError">
+            <summary>
+            Desplaza la grilla hasta la celda correspondiente al error seleccionado en la lista.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.DrawErrorItem(System.Object,System.Windows.Forms.DrawItemEventArgs)">
+            <summary>
+            Pinta cada elemento del ListBox de errores con color de fondo, barra lateral de color,
+            badge de número de fila, nombre de columna, descripción y sugerencia de corrección.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.Trunc(System.String,System.Int32)">
+            <summary>Trunca una cadena al máximo de caracteres indicado añadiendo "..." si es necesario.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.Save">
+            <summary>
+            Guarda el archivo actual en disco. El formato de salida se infiere de la extensión
+            elegida en el diálogo: PDF, DOCX, CSV, JSON, XML, TXT o TSV.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.SaveDocxTo(System.String)">
+            <summary>
+            Guarda el contenido del editor como DOCX reemplazando todos los párrafos.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.ExportMenu">
+            <summary>
+            Muestra el menú de exportación con todas las opciones disponibles según el tipo de archivo.
+            Para archivos de datos (CSV, JSON, XML, TXT, etc.) agrega las nuevas opciones:
+            PDF, Word (.docx) y Excel (.xlsx).
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.ExportAs(System.String)">
+            <summary>
+            Exporta los datos actuales al formato indicado (csv, json, xml, txt, tsv) de forma asíncrona.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.ExportTextAs(System.String)">
+            <summary>Exporta el texto plano del editor (sin tabla) al formato indicado.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.ExportDataToPdf">
+            <summary>
+            Convierte la tabla actual (CSV/JSON/XML/TXT/etc.) a PDF.
+            Escribe cada fila como una línea de texto separada por tabuladores.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.ExportDataToWord">
+            <summary>
+            Convierte la tabla actual a Word (.docx) generando una tabla real con encabezados
+            en negrita y una fila por cada registro.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.ExportDataToExcel">
+            <summary>
+            Convierte la tabla actual a Excel (.xlsx) usando ClosedXML.
+            La primera fila contiene los encabezados en negrita con fondo azul claro.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.ExportPdfToWord">
+            <summary>Convierte un PDF a DOCX extrayendo texto por líneas con PdfPig.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.ExportWordToPdf">
+            <summary>Convierte un DOCX a PDF extrayendo texto de todos los párrafos.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.WritePdfFromText(System.String,System.String)">
+            <summary>
+            Genera un PDF mínimo (PDF 1.4) a partir de texto plano con fuente Helvetica.
+            No requiere librerías externas.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.OpenMigration">
+            <summary>
+            Abre el formulario de migración a base de datos con los datos actuales.
+            Al confirmar cambios, actualiza la grilla y marca el archivo como modificado.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.LoadFile">
+            <summary>
+            Punto de entrada de carga: detecta si el archivo está en la nube y,
+            según la extensión, delega al método de carga correspondiente.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.RunLoad(System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            Ejecuta un loader asíncrono deshabilitando los botones de detección y migración
+            mientras carga, y los restaura al terminar.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.LoadCsvAsync">
+            <summary>Carga un CSV o TSV: detecta encoding y separador, parsea y construye la grilla virtual.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.LoadJsonAsync">
+            <summary>Carga un JSON: lo indenta en el editor y parsea la estructura tabular para la grilla.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.LoadXmlAsync">
+            <summary>Carga un XML: lo formatea en el editor y extrae filas/columnas para la grilla.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.LoadTextAsync">
+            <summary>
+            Carga un archivo de texto plano. Si tiene estructura de tabla (TXT/MD con separadores),
+            activa automáticamente la vista de grilla; si no, muestra el editor de texto.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.LoadExcelAsync">
+            <summary>Carga un archivo Excel (.xlsx/.xls) parseando todas sus hojas a la grilla virtual.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.LoadImage">
+            <summary>
+            Carga una imagen en la vista de documento con su información de dimensiones y tamaño.
+            Escala la imagen para caber en el panel y ofrece un botón para verla en tamaño real.
+            Soporta SVG (muestra el código fuente) y archivos en la nube.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.LoadWord">
+            <summary>Inicia la carga de Word difiriendo el renderizado al evento Shown para evitar bloquear la UI.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.RenderWordContent">
+            <summary>
+            Renderiza el contenido DOCX en el panel de vista: párrafos con formato (negrita, color,
+            tamaño), tablas como DataGridView e imágenes embebidas como PictureBox.
+            También copia el texto plano al editor.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.RenderWordPara(DocumentFormat.OpenXml.Wordprocessing.Paragraph)">
+            <summary>
+            Renderiza un párrafo DOCX como RichTextBox, aplicando el estilo de encabezado
+            (H1/H2/H3) o texto normal según el ParagraphStyleId, y el formato de cada Run.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.RenderWordTable(DocumentFormat.OpenXml.Wordprocessing.Table)">
+            <summary>
+            Renderiza una tabla DOCX como DataGridView con la primera fila en negrita.
+            El ancho de columna se calcula para distribuir el espacio disponible.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.LoadPdf">
+            <summary>
+            Carga un PDF página por página con PdfPig: extrae imágenes y reconstruye
+            el texto agrupando palabras por posición vertical (bounding box).
+            Cada página se muestra con un banner de número y su contenido como RichTextBox.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.LoadPptx">
+            <summary>
+            Carga una presentación PPTX mostrando cada diapositiva con un banner numerado
+            y el texto de todos sus elementos de texto (DxText).
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.OpenExternal">
+            <summary>
+            Muestra un mensaje para archivos sin visor integrado y un botón
+            para abrirlos con el programa predeterminado del sistema.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.TryAddImage(System.Byte[])">
+            <summary>
+            Intenta decodificar y mostrar una imagen desde un array de bytes embebido
+            (p.ej. imágenes dentro de un DOCX). Escala al ancho máximo disponible.
+            </summary>
+        </member>
+        <member name="F:FileExplorer.Forms.FileEditorForm.ChartColors">
+            <summary>Paleta de colores cíclica usada para barras y sectores en las gráficas.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.BuildVirtualGrid">
+            <summary>
+            Reconstruye la grilla virtual desde cero: limpia columnas, agrega la columna índice "#",
+            agrega una columna por cada header con ancho proporcional al nombre,
+            actualiza el ComboBox de búsqueda y refresca los combos de gráficas.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.RefreshChartCombos">
+            <summary>Sincroniza los ComboBox de columna X/Y de la pestaña Gráficas con los headers actuales.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.DrawChart">
+            <summary>Fuerza el repintado del panel de gráfica para regenerar la vista actual.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.PnlChart_Paint(System.Object,System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Pinta la gráfica activa (barras o pastel) al repintar el panel.
+            Agrega los valores de la columna seleccionada: si son numéricos los suma por etiqueta;
+            si todos son cero, cuenta frecuencias. Toma los 20 valores más altos.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.SearchInGrid">
+            <summary>
+            Busca el texto del campo de búsqueda en la grilla en paralelo.
+            Resalta las celdas que coinciden y desplaza la vista a la primera fila encontrada.
+            Puede filtrar por todas las columnas, por el índice o por una columna específica.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.ClearSearch">
+            <summary>Limpia el resaltado de búsqueda y el campo de texto, restaurando la grilla al estado normal.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.ToggleTxtTable">
+            <summary>
+            Alterna entre la vista de tabla y la vista de texto para archivos TXT/MD/LOG.
+            Al activar la tabla intenta parsear el texto como datos estructurados;
+            si no puede, lo muestra como una columna de líneas.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.FileEditorForm.ConfigureTabs">
+            <summary>
+            Elimina del TabControl las pestañas que no aplican al tipo de archivo actual.
+            PDF/Word: sin Tabla ni Gráficas. PPTX: solo Vista.
+            Imagen: solo Vista. Excel: sin Vista ni Editor. Datos: sin Vista. Resto: solo Editor.
+            </summary>
+        </member>
+        <member name="T:FileExplorer.Forms.ImageViewerForm">
+            <summary>
+            Visor de imágenes con soporte para edición, filtros, zoom, recorte,
+            dibujo a mano, texto superpuesto y coordenadas GPS EXIF.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.#ctor(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Inicializa el visor con la imagen inicial y la lista completa de imágenes de la carpeta.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.LoadCurrentImage">
+            <summary>
+            Carga la imagen actual desde disco usando MemoryStream para no bloquear el archivo,
+            permitiendo renombrar o mover la imagen mientras está abierta en el visor.
+            Actualiza metadatos y reconstruye las miniaturas.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.DisposeCurrentBitmaps">
+            <summary>Libera los bitmaps actualmente cargados en memoria.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ResetEditState">
+            <summary>Restablece los controles de edición y los valores de estado al cargar una nueva imagen.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.UpdateFileInfo(System.String)">
+            <summary>Actualiza los labels de nombre, dimensiones y tamaño de archivo.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.UpdateGpsPanel(System.String)">
+            <summary>Lee las coordenadas GPS de la imagen y actualiza el panel lateral y el mapa.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.BuildThumbs">
+            <summary>Reconstruye la tira de miniaturas resaltando la imagen actual.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.SetZoom(System.Single)">
+            <summary>Establece el nivel de zoom; con 0 ajusta automáticamente al tamaño del panel.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ChangeZoom(System.Single)">
+            <summary>Incrementa o decrementa el zoom actual en el delta indicado.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ApplyZoom">
+            <summary>Aplica el zoom actual redibujando la imagen escalada en el PictureBox.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.Navigate(System.Int32)">
+            <summary>Navega a la imagen anterior o siguiente de forma circular.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.Form_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary>Maneja atajos de teclado: flechas para navegar, +/- para zoom y Escape para cancelar.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.IsCloudFile(System.String)">
+            <summary>Detecta si un archivo está pendiente de descarga desde la nube.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.InitializeComponent">
+            <summary>
+            Inicializa y compone todos los paneles de la ventana.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.BuildTopBar">
+            <summary>
+            Construye la barra superior con título y botones de navegación.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.BuildEditBar">
+            <summary>
+            Construye la barra de edición con transformaciones, filtros y herramientas.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.BuildStrip">
+            <summary>
+            Construye la tira de miniaturas en la parte inferior.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.BuildInfoPanel">
+            <summary>
+            Construye el panel lateral con info de archivo y coordenadas GPS.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.BuildCenter">
+            <summary>
+            Construye el área central con el PictureBox y botones de navegación superpuestos.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ArrowBtn(System.String)">
+            <summary>
+            Crea un botón de flecha semitransparente para navegación sobre la imagen.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.GroupLbl(System.Windows.Forms.Panel,System.String,System.Int32)">
+            <summary>
+            Agrega un label de grupo (etiqueta de sección) a la barra de edición.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.NavBtn(System.Windows.Forms.Panel,System.Int32@,System.String,System.Action,System.Nullable{System.Drawing.Color})">
+            <summary>
+            Agrega un botón de navegación anclado a la derecha del panel.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ToolBtn(System.Windows.Forms.Panel,System.Int32@,System.String,System.String,System.Action)">
+            <summary>
+            Agrega un botón de herramienta con icono y tooltip a la barra de edición.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ActionBtn(System.Windows.Forms.Panel,System.Int32@,System.String,System.Action,System.Drawing.Color)">
+            <summary>
+            Agrega un botón de acción anclado a la derecha de la barra de edición.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.VSep(System.Windows.Forms.Panel,System.Int32@)">
+            <summary>
+            Agrega un separador vertical a la barra de edición.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.SliderGrp(System.Windows.Forms.Panel,System.Int32@,System.Windows.Forms.TrackBar@,System.Int32,System.Int32,System.Int32,System.Action{System.Int32})">
+            <summary>
+            Agrega un TrackBar con sus eventos de cambio de valor.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.SecHdr(System.String)">
+            <summary>
+            Crea un encabezado de sección con línea separadora para el panel de info.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.CoordRow(System.String,System.Windows.Forms.TextBox@)">
+            <summary>
+            Crea una fila de coordenada GPS con label y TextBox de solo lectura.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.MapBtn(System.String,System.Drawing.Color)">
+            <summary>
+            Crea un botón de mapa con ancho fijo y estilo flat.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.InfoLbl(System.Int32,System.Drawing.Color,System.Single)">
+            <summary>
+            Crea un Label estándar para el panel de información.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.PaintBottomBorder(System.Object,System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Dibuja el borde inferior de un panel (usado en Paint events).
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.RotateCW">
+            <summary>Rota la imagen 90° en sentido horario.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.RotateCCW">
+            <summary>Rota la imagen 90° en sentido antihorario.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.FlipH">
+            <summary>Voltea la imagen horizontalmente.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.FlipV">
+            <summary>Voltea la imagen verticalmente.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ApplyGrayscale">
+            <summary>Alterna el filtro de escala de grises, desactivando sepia si estaba activo.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ApplySepia">
+            <summary>Alterna el filtro sepia, desactivando escala de grises si estaba activa.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ShowEdited">
+            <summary>Muestra la imagen editada en el PictureBox con modo Zoom.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ApplyFilters">
+            <summary>
+            Aplica brillo, contraste y el filtro activo (escala de grises o sepia)
+            generando una nueva imagen editada desde el original.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.BuildColorMatrix">
+            <summary>
+            Construye la ColorMatrix de brillo/contraste con el filtro activo.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ResetEdits">
+            <summary>
+            Restablece todos los filtros y ajustes devolviendo la imagen al estado original.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ResetToolBtns">
+            <summary>Resetea el color de fondo de los botones de herramienta al estado inactivo.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ToggleCrop">
+            <summary>Activa o desactiva el modo de recorte.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ToggleDraw">
+            <summary>Activa o desactiva el modo de dibujo a mano alzada.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ToggleTextMode">
+            <summary>Desactiva los modos activos y abre el diálogo de texto.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.PickDrawColor">
+            <summary>Abre un ColorDialog para cambiar el color del pincel de dibujo.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.CycleBrushSize">
+            <summary>Cicla entre tamaños de pincel: XL → 2px → S → 4px → M → 8px → L → 16px.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ApplyCrop">
+            <summary>
+            Aplica el recorte seleccionado convirtiéndolo a coordenadas de imagen,
+            reemplazando la imagen editada con el área recortada.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.CancelCrop">
+            <summary>Cancela el modo de recorte y limpia el rectángulo de selección.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.Pic_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Maneja MouseDown en el PictureBox: inicia selección de recorte, arrastre de handle
+            o inicio de trazo de dibujo según el modo activo.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.Pic_MouseMove(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Maneja MouseMove: actualiza el rectángulo de recorte, desplaza handles
+            o dibuja trazos sobre la imagen según el modo activo.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.Pic_MouseUp(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Maneja MouseUp: confirma la selección de recorte o termina el trazo de dibujo.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.Pic_Paint(System.Object,System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Dibuja el overlay de recorte: zona oscurecida, rejilla de tercios,
+            handles de redimensionado y botones de Aplicar/Cancelar.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.GetHandleRects">
+            <summary>Devuelve los 8 rectángulos de los handles de redimensionado del recorte.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.HitHandle(System.Drawing.Point)">
+            <summary>Retorna el índice del handle que contiene el punto, o -1 si ninguno.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.HandleCursor(System.Int32)">
+            <summary>Devuelve el cursor adecuado para el handle indicado.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.GetCropApplyRect">
+            <summary>Rectángulo del botón "Aplicar recorte" sobre el canvas.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.GetCropCancelRect">
+            <summary>Rectángulo del botón "Cancelar" sobre el canvas.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.DrawCropButton(System.Drawing.Graphics,System.Drawing.Rectangle,System.String,System.Drawing.Color)">
+            <summary>Dibuja un botón con esquinas redondeadas sobre el canvas de recorte.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.PicToImg(System.Drawing.Point)">
+            <summary>
+            Convierte un punto en coordenadas del PictureBox a coordenadas de la imagen editada.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ShowTextInputDialog">
+            <summary>
+            Muestra un formulario modal para agregar texto sobre la imagen,
+            con opciones de fuente, tamaño, negrita, color y posición.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.DeleteCurrentImage">
+            <summary>
+            Pide confirmación y elimina la imagen actual del disco.
+            Navega a la siguiente imagen o cierra el visor si no quedan más.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.SaveImageAs">
+            <summary>
+            Abre un SaveFileDialog STA y guarda la imagen editada en PNG, JPEG o BMP
+            según la extensión elegida por el usuario.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ShowImageConvertDialog">
+            <summary>
+            Muestra el diálogo de conversión y redimensionado de imagen.
+            Permite elegir formato de salida (PNG/JPEG/BMP/TIFF), dimensiones personalizadas
+            o presets, calidad JPEG y proporciones bloqueadas. Guarda de forma asíncrona.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.ShowAddGpsDialog">
+            <summary>
+            Muestra el diálogo para agregar o reemplazar coordenadas GPS en la imagen actual.
+            Permite buscar un lugar por nombre vía Nominatim (OpenStreetMap), pegar coordenadas
+            de Google Maps manualmente, o abrir Google Maps para copiarlas.
+            Al confirmar, escribe los datos EXIF y recarga la imagen.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.WriteGps(System.String,System.Double,System.Double)">
+            <summary>
+            Escribe las coordenadas GPS como etiquetas EXIF en el archivo JPEG indicado.
+            Convierte grados decimales a grados/minutos/segundos (racional) y usa un archivo
+            temporal para no corromper el original si el guardado falla.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.ImageViewerForm.OpenInMaps(System.Boolean)">
+            <summary>
+            Abre la imagen actual en Google Maps o OpenStreetMap según el parámetro.
+            Si la imagen no tiene coordenadas GPS muestra un aviso.
+            </summary>
+        </member>
+        <member name="T:FileExplorer.Forms.OsmMapPanel">
+            <summary>
+            Panel que descarga y muestra un tile de mapa (CartoCDN o OpenStreetMap)
+            con un marcador en la ubicación indicada. La descarga se hace en background.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.OsmMapPanel.LoadLocation(System.Double,System.Double)">
+            <summary>
+            Descarga el tile de mapa en zoom 15 para las coordenadas dadas y dibuja el marcador.
+            Intenta primero CartoCDN (voyager) y hace fallback a OSM si falla.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.OsmMapPanel.ClearMap">
+            <summary>Limpia el tile y muestra el mensaje por defecto sin coordenadas.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.OsmMapPanel.SetStatus(System.String)">
+            <summary>Actualiza el mensaje de estado desde cualquier hilo de forma segura.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.OsmMapPanel.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Dibuja el tile descargado escalado al tamaño del panel,
+            o el mensaje de estado si aún no hay tile disponible.
+            </summary>
+        </member>
+        <member name="T:FileExplorer.Forms.MigrationForm">
+            <summary>
+            Formulario para configurar la conexion a base de datos y migrar datos.
+            Las credenciales por defecto estan en el codigo y se cargan cada vez que
+            se abre el formulario — nunca se guardan al cerrar.
+            Funciona en red local sin necesidad de internet.
+            </summary>
+        </member>
+        <member name="E:FileExplorer.Forms.MigrationForm.OnRowsChanged">
+            <summary>Se dispara cuando el usuario aplica cambios del visor BD al archivo original.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MigrationForm.#ctor(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.Collections.Generic.List{System.String}})">
+            <summary>Inicializa el formulario con los headers y filas a migrar.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MigrationForm.LoadDefaultCredentials">
+            <summary>
+            Carga las credenciales por defecto segun el motor seleccionado.
+            El Host siempre queda vacio para que el usuario lo llene.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MigrationForm.BuildOptions">
+            <summary>Construye las opciones de migracion leyendo todos los campos de la UI.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MigrationForm.TestConnection">
+            <summary>Prueba la conexion con los datos ingresados y muestra el resultado en el log.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MigrationForm.StartMigration">
+            <summary>Inicia la migracion asincrona mostrando progreso en la barra y el log.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MigrationForm.VerDatosDB">
+            <summary>
+            Lee los datos de la tabla en la BD, detecta errores con DataValidator
+            y los muestra en el visor editable.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MigrationForm.Log(System.String,System.Drawing.Color)">
+            <summary>Agrega una linea al log con timestamp y color indicado.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MigrationForm.InitializeComponent">
+            <summary>
+            Construye toda la interfaz: campos de conexion, opciones de migracion,
+            barra de progreso y log de operaciones.
+            Las credenciales se cargan desde el codigo al abrir y al cambiar motor.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MigrationForm.Row(System.Windows.Forms.Panel,System.String,System.Int32)">
+            <summary>Agrega un label de campo al panel.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MigrationForm.Hint(System.Windows.Forms.Panel,System.Int32,System.Int32,System.String)">
+            <summary>Agrega un hint de ayuda junto al campo.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MigrationForm.Fld(System.Windows.Forms.Panel,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>Crea y agrega un TextBox al panel.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MigrationForm.Combo(System.Windows.Forms.Panel,System.Int32,System.Int32,System.Int32)">
+            <summary>Crea y agrega un ComboBox al panel.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MigrationForm.Btn(System.String,System.Drawing.Color,System.Int32,System.Action)">
+            <summary>Crea un boton de accion con color y accion especificados.</summary>
+        </member>
+        <member name="T:FileExplorer.Forms.MusicPlayerForm">
+            <summary>
+            Gestión de caché local de metadatos y letras para el reproductor de música.
+            Los datos se guardan en JSON en AppData/FileExplorer/MusicCache/ usando el
+            hash MD5 del path como nombre de archivo, evitando rutas inválidas.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MusicPlayerForm.LoadCache(System.String)">
+            <summary>
+            Intenta cargar los metadatos de una canción desde la caché local.
+            Devuelve null si no existe o está corrupta.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MusicPlayerForm.ApplyCache(FileExplorer.Forms.MusicPlayerForm.TrackCache,FileExplorer.Models.PlaylistItem)">
+            <summary>
+            Aplica los datos de la caché a un PlaylistItem: título, artista, álbum,
+            género, letra y carátula. Devuelve true si se aplicaron datos.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MusicPlayerForm.SaveCache(FileExplorer.Models.PlaylistItem,System.String)">
+            <summary>
+            Guarda los metadatos y letra de un PlaylistItem en la caché local.
+            La carátula se serializa en Base64 (máx 300×300 px para ahorrar espacio).
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MusicPlayerForm.UpdateMetaCache(FileExplorer.Models.PlaylistItem)">
+            <summary>
+            Actualiza solo los metadatos editables (título, artista, álbum, género)
+            en la caché sin tocar la letra ni la carátula existentes.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MusicPlayerForm.EditCurrentMetadata">
+            <summary>
+            Abre el diálogo de edición de metadatos para la canción actual.
+            Permite editar título, artista, álbum, género y año.
+            Los cambios se guardan en la caché local y se reflejan en la UI.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MusicPlayerForm.GetCacheKey(System.String)">
+            <summary>
+            Genera una clave única para la caché usando MD5 del path del archivo,
+            evitando problemas con rutas largas o caracteres especiales.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MusicPlayerForm.ReadMetaNoWait(System.String)">
+            <summary>
+            Lee metadatos en este orden: caché local → etiquetas del archivo.
+            Guarda en caché de memoria para evitar releer el archivo.
+            </summary>
+        </member>
+        <member name="T:FileExplorer.Forms.VideoPlayerForm">
+            <summary>
+            Reproductor de video con LibVLC, controles de progreso, volumen,
+            velocidad y modo pantalla completa.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.VideoPlayerForm.LoadVideo">
+            <summary>Carga y reproduce el video con LibVLC.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.VideoPlayerForm.ToggleFull">
+            <summary>Alterna entre ventana normal y pantalla completa.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.VideoPlayerForm.InitializeComponent">
+            <summary>
+            Construye la UI: título, área de video y barra inferior
+            con progreso, botones, velocidad y volumen.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.VideoPlayerForm.DoLayout">
+            <summary>Posiciona todos los controles de la barra inferior.</summary>
+        </member>
+        <member name="T:FileExplorer.Forms.WordPdfEditorForm">
+            <summary>
+            Editor de documentos Word/PDF con soporte para texto enriquecido,
+            imágenes con ajuste de tamaño, listas, alineación, tablas
+            y guardado como DOCX o PDF.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.WordPdfEditorForm.SaveFile">
+            <summary>
+            Abre un SaveFileDialog para que el usuario elija dónde guardar el archivo,
+            luego guarda en DOCX o PDF y muestra confirmación.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.WordPdfEditorForm.SaveDocxTo(System.String)">
+            <summary>
+            Crea un DOCX válido en MemoryStream usando OpenXML
+            y lo escribe al disco.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.WordPdfEditorForm.SavePdfTo(System.String)">
+            <summary>
+            Crea un PDF 1.4 mínimo en MemoryStream usando bytes binarios
+            y offsets calculados con precisión, luego lo escribe al disco.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.WordPdfEditorForm.InsertImage">
+            <summary>
+            Abre selector de imagen, muestra diálogo de ajuste de tamaño
+            con vista previa y opción de mantener proporciones,
+            luego inserta la imagen escalada en el RichTextBox.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.WordPdfEditorForm.InsertTable">
+            <summary>Abre un diálogo bien proporcionado para insertar una tabla ASCII.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.WordPdfEditorForm.BuildToolbar">
+            <summary>
+            Toolbar basada en ToolStrip nativo — DPI-aware por defecto.
+            Agrupa: Fuente | Tamaño | Estilos | Color | Alineación | Listas | Insertar | Guardar
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.WordPdfEditorForm.AddTsBtn(System.String,System.String,System.Action,System.Drawing.Font,System.Int32)">
+            <summary>Agrega un ToolStripButton estilizado al ToolStrip.</summary>
+        </member>
+        <member name="M:FileExplorer.Forms.WordPdfEditorForm.UpdateToolbarStateTs">
+            <summary>
+            Actualiza el estado visual de los botones del ToolStrip según
+            el formato de la selección actual en el RichTextBox.
+            </summary>
+        </member>
+        <member name="T:FileExplorer.Forms.DataExporter">
+            <summary>
+            Exporta datos tabulares a cualquier formato soportado.
+            Todos los métodos son estáticos y no dependen de la UI.
+            </summary>
+        </member>
+        <member name="T:FileExplorer.Forms.DataParser">
+            <summary>
+            Parsea archivos de datos — lee valores CRUDOS, sin modificar nada.
+            </summary>
+        </member>
+        <member name="T:FileExplorer.Forms.LameMP3FileWriter">
+            <summary>
+            Implementación de escritor MP3 usando Windows Media Foundation.
+            Acumula el audio PCM en memoria y al hacer Dispose lo codifica a MP3.
+            No requiere NAudio.Lame ni DLLs externas — usa el encoder de Windows.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.LameMP3FileWriter.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>Recibe los bytes PCM del WaveFileReader.</summary>
+        </member>
+        <member name="T:FileExplorer.Forms.DbEngine">
+            <summary>Motor de base de datos soportado.</summary>
+        </member>
+        <member name="T:FileExplorer.Forms.MigrationOptions">
+            <summary>
+            Opciones de conexión y migración ingresadas por el usuario en la UI.
+            Construye las cadenas de conexión dinámicamente — sin credenciales en el código.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MigrationOptions.BuildConnectionString">
+            <summary>
+            Construye la cadena de conexión a la base de datos de trabajo
+            usando los valores ingresados por el usuario en la interfaz.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Forms.MigrationOptions.BuildMasterConnectionString">
+            <summary>
+            Construye la cadena de conexión a la base de datos maestra (master/mysql)
+            para crear la base de datos destino si no existe.
+            </summary>
+        </member>
+        <member name="T:FileExplorer.Helpers.AppLogger">
+             <summary>
+             Logger simple que escribe a disco en:
+               %AppData%\FileExplorer\app.log
+            
+             Niveles: INFO | WARN | ERROR
+             Rotación automática: si el archivo supera 2 MB se renombra a app.log.bak
+             Thread-safe mediante lock.
+             </summary>
+        </member>
+        <member name="T:FileExplorer.Helpers.DatabaseMigrator">
+            <summary>
+            Clase estática con métodos para probar conexión, crear la base de datos,
+            migrar datos y leer tablas desde SQL Server o MariaDB/MySQL.
+            Funciona en red local sin necesidad de internet.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DatabaseMigrator.TestConnectionAsync(FileExplorer.Forms.MigrationOptions)">
+            <summary>
+            Prueba la conexión con las opciones indicadas.
+            Devuelve true si la conexión fue exitosa.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DatabaseMigrator.EnsureDatabaseExistsAsync(FileExplorer.Forms.MigrationOptions,System.Threading.CancellationToken)">
+            <summary>
+            Crea la base de datos destino si no existe, conectándose a master/mysql.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DatabaseMigrator.MigrateAsync(FileExplorer.Forms.MigrationOptions,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.Collections.Generic.List{System.String}},System.IProgress{System.ValueTuple{System.Int32,System.Int32,System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Migra los datos al motor de base de datos seleccionado.
+            Reporta progreso mediante <paramref name="progress"/>.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DatabaseMigrator.ReadTableAsync(FileExplorer.Forms.MigrationOptions,System.Threading.CancellationToken)">
+            <summary>
+            Lee hasta 1000 filas de la tabla indicada y devuelve headers y rows.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DatabaseMigrator.MigrateSqlAsync(FileExplorer.Forms.MigrationOptions,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.Collections.Generic.List{System.String}},System.IProgress{System.ValueTuple{System.Int32,System.Int32,System.String}},System.Threading.CancellationToken)">
+            <summary>Migra datos a SQL Server en lotes de 500 filas.</summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DatabaseMigrator.MigrateMariaDbAsync(FileExplorer.Forms.MigrationOptions,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.Collections.Generic.List{System.String}},System.IProgress{System.ValueTuple{System.Int32,System.Int32,System.String}},System.Threading.CancellationToken)">
+            <summary>Migra datos a MariaDB/MySQL en lotes de 500 filas.</summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DatabaseMigrator.Safe(System.String)">
+            <summary>Sanitiza un nombre de columna o tabla eliminando caracteres no alfanuméricos.</summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DataValidator.Validate(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.Collections.Generic.List{System.String}})">
+            <summary>
+            Recorre todas las filas y columnas en paralelo para detectar errores de validación.
+            Verifica espacios extra, campos vacíos, teléfonos, emails, códigos postales y fechas.
+            Devuelve la lista ordenada por fila y columna.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DataValidator.AutoFix(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.Collections.Generic.List{System.String}},System.Collections.Generic.List{FileExplorer.Models.ValidationError})">
+            <summary>
+            Aplica correcciones automáticas a las filas del CSV basándose en los errores
+            que tienen sugerencia disponible. Devuelve nueva matriz con valores corregidos.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DataValidator.NormalizeDate(System.String)">
+            <summary>Normaliza separadores de fecha a guión (-, / y \ a -).</summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DataValidator.TryConvertDate(System.String)">
+            <summary>
+            Intenta convertir una fecha en distintos formatos comunes al formato ISO 8601 (YYYY-MM-DD).
+            Soporta múltiples culturas (es-MX, es-ES, invariante) y formatos con abreviatura de mes.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DataValidator.TryFixEmail(System.String)">
+            <summary>
+            Intenta corregir un email sin '@' buscando dominios conocidos dentro del texto.
+            Soporta dominios de México, Gmail, Outlook, Yahoo, iCloud y dominios educativos/gubernamentales.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DataValidator.FixEmail(System.String)">
+            <summary>
+            Aplica heurísticas simples para corregir un email malformado:
+            sustituye el primer punto por '@' si no hay '@', o agrega ".com" si falta dominio.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DataValidator.ParseCsvLine(System.String)">
+            <summary>
+            Parsea una línea CSV respetando comillas dobles como delimitador de escape.
+            Maneja celdas con comas internas y comillas escapadas ("").
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DataValidator.ToCsvLine(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Serializa valores a una línea CSV válida, entrecomillando campos con comas,
+            comillas dobles o saltos de línea, y escapando comillas internas con "".
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.DataValidator.Mk(System.Int32,System.Int32,System.String,System.String,FileExplorer.Models.ValidationErrorType,System.String,System.String)">
+            <summary>Crea un ValidationError con todos sus campos.</summary>
+        </member>
+        <member name="F:FileExplorer.Helpers.FileHelper.AudioExt">
+            <summary>Extensiones de archivos de audio soportadas.</summary>
+        </member>
+        <member name="F:FileExplorer.Helpers.FileHelper.VideoExt">
+            <summary>Extensiones de archivos de video soportadas.</summary>
+        </member>
+        <member name="F:FileExplorer.Helpers.FileHelper.ImageExt">
+            <summary>Extensiones de archivos de imagen soportadas.</summary>
+        </member>
+        <member name="F:FileExplorer.Helpers.FileHelper.DataExt">
+            <summary>Extensiones de archivos de datos estructurados (texto, config, logs).</summary>
+        </member>
+        <member name="F:FileExplorer.Helpers.FileHelper.OfficeExt">
+            <summary>Extensiones de documentos de Office y PDF.</summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.FileHelper.BuildCategoryMap">
+            <summary>
+            Construye el mapa de categorías consolidando todos los HashSets en un solo diccionario
+            para lookups en O(1) en lugar de múltiples Contains().
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.FileHelper.Categorize(System.String)">
+            <summary>Devuelve la categoría del archivo según su extensión en O(1).</summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.FileHelper.GetTypeDescription(System.String)">
+            <summary>
+            Devuelve una descripción legible del tipo de archivo (p.ej. "Audio MP3").
+            Si la extensión no está en el mapa, devuelve la extensión en mayúsculas.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.FileHelper.GetIconIndex(System.String,System.Boolean)">
+            <summary>
+            Devuelve el índice de ícono en el ImageList para la ruta indicada.
+            Las carpetas siempre devuelven ICO_FOLDER; los archivos sin mapa devuelven ICO_FILE.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.FileHelper.GetEmoji(System.String)">
+            <summary>Devuelve el emoji correspondiente a la extensión del archivo, o 📎 si no hay mapa.</summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.FileHelper.FormatSize(System.Int64)">
+            <summary>
+            Formatea un tamaño en bytes a una cadena legible:
+            B, KB (1 decimal), MB (1 decimal) o GB (2 decimales).
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.FileHelper.BuildIconList(System.Int32)">
+            <summary>
+            Construye el ImageList de íconos para el ListView del explorador.
+            Genera íconos de color sólido con una letra identificadora pintada con GDI+.
+            El orden de inserción debe coincidir con las constantes ICO_*.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.FileHelper.CopyDirectory(System.String,System.String)">
+            <summary>
+            Copia recursivamente un directorio completo al destino indicado,
+            creando las subcarpetas necesarias y sobreescribiendo archivos existentes.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.FileHelper.GetUniquePath(System.String)">
+            <summary>
+            Devuelve una ruta que no colisiona con archivos o carpetas existentes.
+            Si la ruta ya existe, agrega un sufijo "(2)", "(3)", etc. hasta encontrar una libre.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.GpsHelper.TryRead(System.String)">
+            <summary>
+            Carga la imagen desde disco y extrae sus coordenadas GPS.
+            Devuelve <c>null</c> si el archivo no existe, no es imagen o no tiene GPS.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.GpsHelper.TryRead(System.Drawing.Image)">
+            <summary>
+            Extrae latitud, longitud y altitud de los metadatos EXIF de la imagen.
+            Aplica el signo negativo según el hemisferio (S/W).
+            Devuelve <c>null</c> si la imagen no contiene las propiedades GPS mínimas.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.GpsHelper.ReadRat(System.Drawing.Imaging.PropertyItem)">
+            <summary>
+            Convierte una propiedad EXIF de tipo racional con tres componentes
+            (grados, minutos, segundos) a un valor decimal en grados.
+            Requiere al menos 24 bytes (3 racionales × 8 bytes cada uno).
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.GpsHelper.ReadSingleRat(System.Drawing.Imaging.PropertyItem)">
+            <summary>
+            Convierte una propiedad EXIF de tipo racional con un solo componente
+            (p. ej. altitud) a valor decimal. Requiere al menos 8 bytes.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.GpsHelper.R(System.Byte[],System.Int32)">
+            <summary>
+            Lee un número racional EXIF (numerador / denominador) desde el offset
+            indicado en el array de bytes. Devuelve 0 si el denominador es cero.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.GpsHelper.Ascii(System.Drawing.Imaging.PropertyItem)">
+            <summary>
+            Decodifica el valor de una propiedad EXIF como texto ASCII,
+            eliminando nulos y espacios en los extremos.
+            Devuelve cadena vacía si el valor es nulo.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.Helpers.GpsHelper.BuildMapHtml(FileExplorer.Models.GpsLocation)">
+            <summary>
+            Genera el HTML completo de un mapa Leaflet centrado en las coordenadas
+            del <see cref="T:FileExplorer.Models.GpsLocation"/> indicado, con un marcador y popup en el punto exacto.
+            El HTML es autónomo y puede cargarse directamente en un WebBrowser o archivo.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.MainForm.AskNewFileName(System.String)">
+            <summary>Muestra un diálogo compacto para pedir el nombre del nuevo archivo.</summary>
+        </member>
+        <member name="P:FileExplorer.Models.PlaylistItem.DisplayName">
+            <summary>Devuelve el título si existe, o el nombre del archivo sin extensión.</summary>
+        </member>
+        <member name="P:FileExplorer.Models.PlaylistItem.DisplayArtist">
+            <summary>Devuelve el artista si existe, o "Artista desconocido".</summary>
+        </member>
+        <member name="P:FileExplorer.Models.PlaylistItem.DisplayAlbum">
+            <summary>Devuelve el álbum si existe, o "Álbum desconocido".</summary>
+        </member>
+        <member name="P:FileExplorer.Models.PlaylistItem.DurationText">
+            <summary>Formatea la duración como m:ss o h:mm:ss según corresponda.</summary>
+        </member>
+        <member name="P:FileExplorer.Models.ValidationError.Col">
+            <summary>Alias de Column — índice de columna del error.</summary>
+        </member>
+        <member name="P:FileExplorer.Models.ValidationError.ColumnName">
+            <summary>Alias de FieldName — nombre de la columna.</summary>
+        </member>
+        <member name="P:FileExplorer.Models.ValidationError.AutoFix">
+            <summary>Alias de Suggestion — valor sugerido para corrección automática.</summary>
+        </member>
+        <member name="P:FileExplorer.Models.ValidationError.CanAutoFix">
+            <summary>Indica si el error tiene una sugerencia aplicable y no es un campo vacío.</summary>
+        </member>
+        <member name="P:FileExplorer.Models.GpsLocation.LatitudeText">
+            <summary>Devuelve la latitud formateada con indicador N/S.</summary>
+        </member>
+        <member name="P:FileExplorer.Models.GpsLocation.LongitudeText">
+            <summary>Devuelve la longitud formateada con indicador E/W.</summary>
+        </member>
+        <member name="P:FileExplorer.Models.GpsLocation.AltitudeText">
+            <summary>Devuelve la altitud formateada en metros.</summary>
+        </member>
+        <member name="M:FileExplorer.Models.GpsLocation.I(System.Double)">
+            <summary>Formatea un valor double usando punto como separador decimal (invariante).</summary>
+        </member>
+        <member name="P:FileExplorer.Models.GpsLocation.GoogleMapsUrl">
+            <summary>URL de Google Maps apuntando a las coordenadas actuales.</summary>
+        </member>
+        <member name="P:FileExplorer.Models.GpsLocation.OpenStreetMapUrl">
+            <summary>URL de OpenStreetMap apuntando a las coordenadas actuales con zoom 15.</summary>
+        </member>
+        <member name="T:FileExplorer.ApplicationConfiguration">
+            <summary>
+             Bootstrap the application configuration.
+            </summary>
+        </member>
+        <member name="M:FileExplorer.ApplicationConfiguration.Initialize">
+            <summary>
+             Bootstrap the application as follows:
+             <code>
+             global::System.Windows.Forms.Application.EnableVisualStyles();
+             global::System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+             global::System.Windows.Forms.Application.SetHighDpiMode(HighDpiMode.SystemAware);
+            </code>
+            </summary>
+        </member>
+    </members>
+</doc>

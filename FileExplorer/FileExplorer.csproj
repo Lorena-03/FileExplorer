@@ -1,0 +1,96 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<UseWindowsForms>true</UseWindowsForms>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<DocumentationFile>FileExplorer.xml</DocumentationFile>
+		<AcceptNPOIOSMFLicense>true</AcceptNPOIOSMFLicense>
+		<NoWarn>WFO1000</NoWarn>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="AForge" Version="2.2.5" />
+		<PackageReference Include="AForge.Video.DirectShow" Version="2.2.5" />
+		<PackageReference Include="ClosedXML" Version="0.105.0" />
+		<PackageReference Include="DirectShowLib" Version="1.0.0" />
+		<PackageReference Include="DocumentFormat.OpenXml" Version="3.5.1" />
+		<PackageReference Include="LibVLCSharp" Version="3.9.7.1" />
+		<PackageReference Include="LibVLCSharp.Forms" Version="3.9.7.1" />
+		<PackageReference Include="LibVLCSharp.WinForms" Version="3.9.7.1" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="7.1.0-preview1.26124.5" />
+		<PackageReference Include="MySqlConnector" Version="2.5.0" />
+		<PackageReference Include="NAudio" Version="2.3.0" />
+		<PackageReference Include="NAudio.Lame" Version="2.1.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.5-beta1" />
+		<PackageReference Include="Npgsql" Version="10.0.2" />
+		<PackageReference Include="NPOI" Version="2.8.0" />
+		<PackageReference Include="OpenCvSharp4" Version="4.13.0.20260602" />
+		<PackageReference Include="OpenCvSharp4.Extensions" Version="4.13.0.20260602" />
+		<PackageReference Include="OpenCvSharp4.runtime.win" Version="4.13.0.20260602" />
+		<PackageReference Include="PdfPig" Version="0.1.15-alpha-20260427-046a5" />
+		<PackageReference Include="SharpAvi" Version="3.0.1" />
+		<PackageReference Include="System.Management" Version="8.0.0" />
+		<PackageReference Include="TagLibSharp" Version="2.3.0" />
+	</ItemGroup>
+	<!-- ImageViewerForm partials -->
+	<ItemGroup>
+		<Compile Update="Forms\ImageViewerForm.Designer.cs">
+			<DependentUpon>ImageViewerForm.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Forms\ImageViewerForm.Edit.cs">
+			<DependentUpon>ImageViewerForm.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Forms\ImageViewerForm.Gps.cs">
+			<DependentUpon>ImageViewerForm.cs</DependentUpon>
+		</Compile>
+		<EmbeddedResource Update="Forms\ImageViewerForm.resx">
+			<DependentUpon>ImageViewerForm.cs</DependentUpon>
+		</EmbeddedResource>
+	</ItemGroup>
+	<!-- FileEditorForm partials -->
+	<ItemGroup>
+		<Compile Update="Forms\FileEditorForm.Errors.cs">
+			<DependentUpon>FileEditorForm.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Forms\FileEditorForm.Export.cs">
+			<DependentUpon>FileEditorForm.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Forms\FileEditorForm.Load.cs">
+			<DependentUpon>FileEditorForm.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Forms\FileEditorForm.Tabs.cs">
+			<DependentUpon>FileEditorForm.cs</DependentUpon>
+		</Compile>
+		<EmbeddedResource Update="Forms\FileEditorForm.resx">
+			<DependentUpon>FileEditorForm.cs</DependentUpon>
+		</EmbeddedResource>
+	</ItemGroup>
+	<!-- MusicPlayerForm partials -->
+	<ItemGroup>
+		<Compile Update="Forms\MusicPlayerForm.Designer.cs">
+			<DependentUpon>MusicPlayerForm.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Forms\MusicPlayerForm.Playback.cs">
+			<DependentUpon>MusicPlayerForm.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	<!-- MigrationForm partials -->
+	<ItemGroup>
+		<Compile Update="Forms\MigrationForm.Designer.cs">
+			<DependentUpon>MigrationForm.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Forms\DbDataViewerForm.Designer.cs">
+			<DependentUpon>DbDataViewerForm.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<None Remove="C:\Users\cerva\.nuget\packages\naudio.lame\2.1.0\build\libmp3lame.32.dll" />
+	</ItemGroup>
+
+	<Target Name="CopyOpenCvExtern" AfterTargets="Build">
+		<Copy SourceFiles="$(OutputPath)runtimes\win-x64\native\OpenCvSharpExtern.dll" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" ContinueOnError="true" />
+	</Target>
+
+</Project>
