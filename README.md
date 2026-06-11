@@ -16,7 +16,7 @@ File Explorer es una aplicación creada en C# Windows Forms que integra diferent
 ---
 
 #  Capturas del sistema
-
+ 
 ---
 
 ##  Reproductor de música
